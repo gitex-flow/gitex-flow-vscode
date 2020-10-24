@@ -1,0 +1,233 @@
+{
+  "name": "gitex-flow-vscode",
+  "displayName": "gitex-flow vscode extension",
+  "description": "The official gitex-flow extension for vscode.",
+  "version": "1.0.0",
+  "main": "./out/extension.js",
+  "publisher": "Cuddly Sheep",
+  "author": {
+    "name": "Cuddly Sheep",
+    "email": "cuddlysheep@posteo.de",
+    "url": "https://github.com/CuddlySheep"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js",
+    "init": "gitex-flow init",
+    "feature:start": "gitex-flow feature start",
+    "feature:finish": "gitex-flow feature finish",
+    "release:start": "gitex-flow release start",
+    "release:finish": "gitex-flow release finish",
+    "hotfix:start": "gitex-flow hotfix start",
+    "hotfix:finish": "gitex-flow hotfix finish",
+    "bugfix:start": "gitex-flow bugfix start",
+    "bugfix:finish": "gitex-flow bugfix finish",
+    "support:start": "gitex-flow support start",
+    "support:finish": "gitex-flow support finish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gitex-flow/gitex-flow-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/gitex-flow/gitex-flow-vscode/issues"
+  },
+  "homepage": "https://github.com/gitex-flow/gitex-flow-vscode",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "keywords": [
+    "git",
+    "flow",
+    "gitflow",
+    "git-flow",
+    "scm",
+    "source control",
+    "vcs",
+    "version control system",
+    "workflow",
+    "deployment",
+    "release",
+    "publish",
+    "SemVer",
+    "conventional commits"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "license": "MIT",
+  "icon": "assets/gitex-vscode-logo.png",
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^12.19.9",
+    "@types/vscode": "^1.52.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.15.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.4.1"
+  },
+  "dependencies": {
+    "gitex-flow": "^2.2.0"
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "json",
+        "filenames": [
+          ".gitex-flow.json",
+          ".gitex-flow",
+          ".gitex.json",
+          ".gitex"
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "gitex-flow.init",
+        "title": "Init gitex-flow",
+        "category": "gitex-flow",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "gitex-flow.feature.start",
+        "title": "Start feature",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "gitex-flow.feature.finish",
+        "title": "Finish feature",
+        "category": "gitex-flow",
+        "icon": "$(primitive-square)"
+      },
+      {
+        "command": "gitex-flow.bugfix.start",
+        "title": "Start bugfix",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "gitex-flow.bugfix.finish",
+        "title": "Finish bugfix",
+        "category": "gitex-flow",
+        "icon": "$(primitive-square)"
+      },
+      {
+        "command": "gitex-flow.release.start",
+        "title": "Start release",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "gitex-flow.release.finish",
+        "title": "Finish release",
+        "category": "gitex-flow",
+        "icon": "$(primitive-square)"
+      },
+      {
+        "command": "gitex-flow.hotfix.start",
+        "title": "Start hotfix",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "gitex-flow.hotfix.finish",
+        "title": "Finish hotfix",
+        "category": "gitex-flow",
+        "icon": "$(primitive-square)"
+      },
+      {
+        "command": "gitex-flow.support.start",
+        "title": "Start support",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
+        "command": "gitex-flow.support.finish",
+        "title": "Finish support",
+        "category": "gitex-flow",
+        "icon": "$(primitive-square)"
+      }
+    ],
+    "views": {
+      "scm": [
+        {
+          "id": "gitexFlowActionsTreeView",
+          "name": "Gitex-flow"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "gitex-flow.init",
+          "group": "navigation",
+          "when": "view == gitexFlowActionsTreeView"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "gitex-flow.feature.start",
+          "when": "viewItem == gitex-feature",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitex-flow.feature.finish",
+          "when": "viewItem == gitex-feature",
+          "group": "inline@2"
+        },
+        {
+          "command": "gitex-flow.bugfix.start",
+          "when": "viewItem == gitex-bugfix",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitex-flow.bugfix.finish",
+          "when": "viewItem == gitex-bugfix",
+          "group": "inline@2"
+        },
+        {
+          "command": "gitex-flow.release.start",
+          "when": "viewItem == gitex-release",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitex-flow.release.finish",
+          "when": "viewItem == gitex-release",
+          "group": "inline@2"
+        },
+        {
+          "command": "gitex-flow.hotfix.start",
+          "when": "viewItem == gitex-hotfix",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitex-flow.hotfix.finish",
+          "when": "viewItem == gitex-hotfix",
+          "group": "inline@2"
+        },
+        {
+          "command": "gitex-flow.support.start",
+          "when": "viewItem == gitex-support",
+          "group": "inline@1"
+        },
+        {
+          "command": "gitex-flow.support.finish",
+          "when": "viewItem == gitex-support",
+          "group": "inline@2"
+        }
+      ]
+    }
+  }
+}

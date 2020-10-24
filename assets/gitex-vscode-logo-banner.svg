@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="gitex-code-logo-banner.svg"
+   inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 338.66666 169.33333"
+   height="169.33333mm"
+   width="338.66666mm">
+  <defs
+     id="defs2">
+    <rect
+       x="109.44944"
+       y="168.99405"
+       width="44.968878"
+       height="15.123431"
+       id="rect64" />
+    <rect
+       x="112.66121"
+       y="171.55533"
+       width="82.731424"
+       height="14.623371"
+       id="rect58" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-maximized="1"
+     inkscape:window-y="27"
+     inkscape:window-x="72"
+     inkscape:window-height="2096"
+     inkscape:window-width="3768"
+     fit-margin-bottom="0"
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="53.990432"
+     inkscape:cx="847.81373"
+     inkscape:zoom="1.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(120.19643,-23.434526)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Ebene 1">
+    <text
+       xml:space="preserve"
+       id="text56"
+       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.58333333px;white-space:pre;shape-inside:url(#rect58);" />
+    <text
+       xml:space="preserve"
+       id="text62"
+       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.58333333px;white-space:pre;shape-inside:url(#rect64);" />
+    <g
+       transform="matrix(0.91615823,0,0,0.91615823,-7.3134965,43.562984)"
+       id="g1075">
+      <path
+         style="fill:#0000cb;fill-opacity:1;stroke-width:0.943881"
+         fill="#f05133"
+         d="M 113.19584,49.065135 66.242458,2.1175232 c -2.701577,-2.70403091 -7.086849,-2.70403091 -9.791823,0 l -9.749349,9.7502928 12.366731,12.366731 c 2.874968,-0.970688 6.170246,-0.319862 8.460857,1.971201 2.302504,2.305336 2.948684,5.628741 1.953646,8.513337 l 11.919331,11.919331 c 2.883651,-0.993717 6.210738,-0.351708 8.513336,1.954967 3.219201,3.218258 3.219201,8.433107 0,11.652214 -3.219673,3.220144 -8.434522,3.220144 -11.655989,0 -2.420583,-2.422471 -3.019287,-5.979016 -1.79328,-8.961398 L 65.34983,40.168111 65.348886,69.419933 c 0.784838,0.38852 1.525501,0.907069 2.179516,1.558254 3.218257,3.217879 3.218257,8.431784 0,11.655045 -3.219201,3.217784 -8.436409,3.217784 -11.652213,0 -3.21873,-3.222977 -3.21873,-8.436883 0,-11.655045 0.795455,-0.794041 1.715882,-1.395058 2.69799,-1.797906 V 39.656622 c -0.98258,-0.40115 -1.90192,-0.997683 -2.698556,-1.798094 -2.438045,-2.436158 -3.025234,-6.014411 -1.774875,-9.008307 L 41.909579,16.657163 9.717567,48.848231 c -2.7048798,2.706108 -2.7048798,7.09138 0,9.795599 l 46.950538,46.94771 c 2.703087,2.70403 7.086848,2.70403 9.793712,0 L 113.19526,58.865642 c 2.70403,-2.705352 2.70403,-7.091945 0,-9.796543"
+         id="path1061" />
+      <text
+         id="text1079"
+         y="132.58211"
+         x="-5.4359865"
+         style="font-style:normal;font-weight:normal;font-size:34.9866px;line-height:0;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.187428"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:34.9866px;line-height:1.25;font-family:Adelle;-inkscape-font-specification:'Adelle, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.187428"
+           y="132.58211"
+           x="-5.4359865"
+           id="tspan1077"
+           sodipodi:role="line"><tspan
+             style="font-size:29.9108px"
+             id="tspan13">git</tspan><tspan
+             id="tspan1081"
+             style="font-size:29.9108px;line-height:1.25;fill:#0000cb;fill-opacity:1;stroke-width:0.187428">ex</tspan><tspan
+             id="tspan837"
+             style="font-size:18.6608px;line-height:1.25;baseline-shift:sub">vscode</tspan></tspan></text>
+    </g>
+  </g>
+</svg>
