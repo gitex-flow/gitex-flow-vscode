@@ -1,9 +1,9 @@
-# 1.0.0 (2020-12-18)
+## 1.0.1 (2020-12-18)
 
 
-### Features
+### Bug Fixes
 
-* **project:** Initial commit with basic program structure ([1eba870](https://github.com/gitex-flow/gitex-flow-vscode/commits/1eba87067813ef1f1dc6b214ebd949bdb54350a9))
+* **vscode-ex:** Adapted package.json to be compatible as vscode extension ([9526850](https://github.com/gitex-flow/gitex-flow-vscode/commits/9526850f19257b4dcc3170cd9127c68abc6b4e30))
 
 
 
