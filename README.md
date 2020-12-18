@@ -1,4 +1,4 @@
-![logo-banner](./assets/gitex-vscode-logo-banner.svg)
+![logo-banner](./assets/gitex-vscode-logo-banner.png)
 
 **gitex-vscode** is the official [gitex-flow](https://github.com/gitex-flow) extension for [visual studio code](https://code.visualstudio.com/).
 
@@ -10,7 +10,7 @@ In addition, the menu provides an initialization option (plug) in the header to 
 For all operations, you are guided through the standardized menu navigation of visual studio code.
 
 <p align="center">
-  <img src="./assets/screenshot.svg">
+  <img src="./assets/screenshot.png">
 </p>
 
 ## Configuration
