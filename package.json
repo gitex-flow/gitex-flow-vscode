@@ -75,12 +75,30 @@
     "vscode-test": "^1.4.1"
   },
   "dependencies": {
-    "gitex-flow": "^2.2.0"
+    "gitex-flow": "^2.2.1"
   },
   "activationEvents": [
     "*"
   ],
   "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": ".gitex-flow",
+        "url": "./schemas/config.schema.json"
+      },
+      {
+        "fileMatch": ".gitex-flow.json",
+        "url": "./schemas/config.schema.json"
+      },
+      {
+        "fileMatch": ".gitex",
+        "url": "./schemas/config.schema.json"
+      },
+      {
+        "fileMatch": ".gitex.json",
+        "url": "./schemas/config.schema.json"
+      }
+    ],
     "languages": [
       {
         "id": "json",

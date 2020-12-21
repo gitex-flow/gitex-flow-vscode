@@ -1,4 +1,4 @@
-import { AvhGitFlow, GFlow, GFlowConfig, GitFlow, GitFlowBranch, GitFlowConfig } from 'gitex-flow';
+import { AvhGitFlow, GFlow, GFlowConfig, GFlowConfigLoader, GitFlow, GitFlowBranch, GitFlowConfig } from 'gitex-flow';
 import * as vscode from 'vscode';
 import { GFlowExtBranch } from './branches/GFlowExtBranch';
 
@@ -22,11 +22,8 @@ export class GFlowExtension extends GFlow {
     }
     const projectPath = workspaceFolder.uri.fsPath;
     const gitFlow = new AvhGitFlow(projectPath);
-    const gFlow = new GFlowExtension(gitFlow, {
-      projectConfig: {
-        projectPath: projectPath,
-      },
-    });
+    const gFlowConfig = GFlowExtension.loadConfig(projectPath);
+    const gFlow = new GFlowExtension(gitFlow, gFlowConfig);
     return gFlow;
   }
 
@@ -98,5 +95,25 @@ export class GFlowExtension extends GFlow {
         await super.init(config, true);
       }
     }
+  }
+
+  /**
+   * Loads the config.
+   *
+   * @param projectPath - The path of the projekt (workspace).
+   */
+  private static loadConfig(projectPath: string): GFlowConfig {
+    let gFlowConfig = GFlowConfigLoader.load(projectPath);
+    if (!gFlowConfig) {
+      gFlowConfig = {};
+    }
+    if (!gFlowConfig.projectConfig) {
+      gFlowConfig.projectConfig = {
+        projectPath: projectPath,
+      };
+    } else {
+      gFlowConfig.projectConfig.projectPath = projectPath;
+    }
+    return gFlowConfig;
   }
 }

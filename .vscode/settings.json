@@ -10,6 +10,7 @@
     "typescript.tsc.autoDetect": "off",
     "conventionalCommits.scopes": [
         "project",
-        "vscode-ex"
+        "vscode-ex",
+        "config"
     ]
 }
