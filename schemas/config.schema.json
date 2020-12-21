@@ -1,0 +1,746 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AppenderModule": {
+            "properties": {
+                "configure": {
+                    "$ref": "#/definitions/Function"
+                }
+            },
+            "type": "object"
+        },
+        "BaseLayout": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "basic"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CategoryFilterAppender": {
+            "description": "Category Filter",
+            "properties": {
+                "appender": {
+                    "type": "string"
+                },
+                "exclude": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "categoryFilter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ColoredLayout": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "colored",
+                        "coloured"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Configuration": {
+            "properties": {
+                "appenders": {
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CategoryFilterAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/NoLogFilterAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/ConsoleAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/FileAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/SyncfileAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/DateFileAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/LogLevelFilterAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/MultiFileAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/MultiprocessAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/RecordingAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/StandardErrorAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/StandardOutputAppender"
+                            },
+                            {
+                                "$ref": "#/definitions/CustomAppender"
+                            }
+                        ]
+                    },
+                    "type": "object"
+                },
+                "categories": {
+                    "additionalProperties": {
+                        "properties": {
+                            "appenders": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "enableCallStack": {
+                                "type": "boolean"
+                            },
+                            "level": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "object"
+                },
+                "disableClustering": {
+                    "type": "boolean"
+                },
+                "levels": {
+                    "$ref": "#/definitions/Levels"
+                },
+                "pm2": {
+                    "type": "boolean"
+                },
+                "pm2InstanceVar": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ConsoleAppender": {
+            "description": "Console Appender",
+            "properties": {
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "console"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CustomAppender": {
+            "additionalProperties": {
+            },
+            "properties": {
+                "type": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/AppenderModule"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "CustomLayout": {
+            "additionalProperties": {
+            },
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DateFileAppender": {
+            "properties": {
+                "alwaysIncludePattern": {
+                    "type": "boolean"
+                },
+                "compress": {
+                    "type": "boolean"
+                },
+                "daysToKeep": {
+                    "type": "number"
+                },
+                "encoding": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "flags": {
+                    "type": "string"
+                },
+                "keepFileExt": {
+                    "type": "boolean"
+                },
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "mode": {
+                    "type": "number"
+                },
+                "pattern": {
+                    "description": "The following strings are recognised in the pattern:\n - yyyy : the full year, use yy for just the last two digits\n - MM   : the month\n - dd   : the day of the month\n - hh   : the hour of the day (24-hour clock)\n - mm   : the minute of the hour\n - ss   : seconds\n - SSS  : milliseconds (although I'm not sure you'd want to roll your logs every millisecond)\n - O    : timezone (capital letter o)",
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "dateFile"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DummyLayout": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "dummy"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "FileAppender": {
+            "properties": {
+                "backups": {
+                    "type": "number"
+                },
+                "compress": {
+                    "type": "boolean"
+                },
+                "encoding": {
+                    "type": "string"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "flags": {
+                    "type": "string"
+                },
+                "keepFileExt": {
+                    "type": "boolean"
+                },
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "maxLogSize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "mode": {
+                    "type": "number"
+                },
+                "numBackups": {
+                    "type": "number"
+                },
+                "type": {
+                    "enum": [
+                        "file"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Function": {
+            "description": "Creates a new function.",
+            "properties": {
+                "arguments": {
+                },
+                "caller": {
+                    "$ref": "#/definitions/Function"
+                },
+                "length": {
+                    "type": "number"
+                },
+                "name": {
+                    "description": "Returns the name of the function. Function names are read-only and can not be changed.",
+                    "type": "string"
+                },
+                "prototype": {
+                }
+            },
+            "type": "object"
+        },
+        "GitFlowConfig": {
+            "description": "Configuration of a git flow instance.",
+            "properties": {
+                "bugfixBranchPrefix": {
+                    "type": "string"
+                },
+                "developBranch": {
+                    "type": "string"
+                },
+                "featureBranchPrefix": {
+                    "type": "string"
+                },
+                "hotfixBranchPrefix": {
+                    "type": "string"
+                },
+                "masterBranch": {
+                    "type": "string"
+                },
+                "releaseBranchPrefix": {
+                    "type": "string"
+                },
+                "supportBranchPrefix": {
+                    "type": "string"
+                },
+                "versionTagPrefix": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Level": {
+            "properties": {
+                "colour": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "number"
+                },
+                "levelStr": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Levels": {
+            "properties": {
+                "ALL": {
+                    "$ref": "#/definitions/Level"
+                },
+                "DEBUG": {
+                    "$ref": "#/definitions/Level"
+                },
+                "ERROR": {
+                    "$ref": "#/definitions/Level"
+                },
+                "FATAL": {
+                    "$ref": "#/definitions/Level"
+                },
+                "INFO": {
+                    "$ref": "#/definitions/Level"
+                },
+                "MARK": {
+                    "$ref": "#/definitions/Level"
+                },
+                "OFF": {
+                    "$ref": "#/definitions/Level"
+                },
+                "TRACE": {
+                    "$ref": "#/definitions/Level"
+                },
+                "WARN": {
+                    "$ref": "#/definitions/Level"
+                },
+                "levels": {
+                    "items": {
+                        "$ref": "#/definitions/Level"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "LogLevelFilterAppender": {
+            "properties": {
+                "appender": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "string"
+                },
+                "maxLevel": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "logLevelFilter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MessagePassThroughLayout": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "messagePassThrough"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MultiFileAppender": {
+            "properties": {
+                "base": {
+                    "type": "string"
+                },
+                "extension": {
+                    "type": "string"
+                },
+                "property": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "multiFile"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "MultiprocessAppender": {
+            "properties": {
+                "appender": {
+                    "type": "string"
+                },
+                "loggerHost": {
+                    "type": "string"
+                },
+                "loggerPort": {
+                    "type": "number"
+                },
+                "mode": {
+                    "enum": [
+                        "master",
+                        "worker"
+                    ],
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "multiprocess"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NoLogFilterAppender": {
+            "description": "No Log Filter",
+            "properties": {
+                "appender": {
+                    "type": "string"
+                },
+                "exclude": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "noLogFilter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "PatternLayout": {
+            "properties": {
+                "pattern": {
+                    "type": "string"
+                },
+                "tokens": {
+                    "additionalProperties": {
+                        "type": [
+                            "string",
+                            "object"
+                        ]
+                    },
+                    "type": "object"
+                },
+                "type": {
+                    "enum": [
+                        "pattern"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ProjectConfig": {
+            "description": "Options of the git flow node project.",
+            "properties": {
+                "bumpVersionFiles": {
+                    "description": "Specifies the JSON files containing a version attribute to be overwritten if the version changes.\n*DEFAULTS*: 'package.json' and 'package-lock.json'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "changelogFileName": {
+                    "description": "Specifies the name of the changelog.\n*DEFAULTS*: CHANGELOG.md",
+                    "type": "string"
+                },
+                "conventionalChangelogPresent": {
+                    "description": "Specifies the conventional commit format.\nThe selectable options are:\n- angular (default)\n- atom\n- ember\n- eslint\n- jquery\n- jshint\n\nFor more infomation check out the documentation of the\n[conventional-changelog-preset-loader](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-preset-loader).\nThis loader is used to load the corresponding present.",
+                    "type": "string"
+                },
+                "projectPath": {
+                    "description": "Path to the node project folder / git repository.",
+                    "type": "string"
+                },
+                "storeLatestChangelog": {
+                    "description": "Set this flag to keep the changelog of the latest release as [[changelogFileName]].latest.md.\nThis file can be useful for some other tools which processes the release information (ex. gitlab).",
+                    "type": "boolean"
+                },
+                "versionFile": {
+                    "description": "Specifies the primary version file containing the version of the project.\n*DEFAULTS*: 'package.json'",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RecordingAppender": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "recording"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StandardErrorAppender": {
+            "properties": {
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "stderr"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "StandardOutputAppender": {
+            "properties": {
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "stdout"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "SyncfileAppender": {
+            "properties": {
+                "backups": {
+                    "type": "number"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "layout": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/BaseLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/ColoredLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/MessagePassThroughLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/DummyLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/PatternLayout"
+                        },
+                        {
+                            "$ref": "#/definitions/CustomLayout"
+                        }
+                    ]
+                },
+                "maxLogSize": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "type": {
+                    "enum": [
+                        "fileSync"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "description": "Options of the GFlow implementation.",
+    "properties": {
+        "gitFlowConfig": {
+            "$ref": "#/definitions/GitFlowConfig",
+            "description": "The git flow config can be directly set in the GFlow options.\nThis config will be taken if no other git flow config is given on calling the `init` method."
+        },
+        "log4jsConfig": {
+            "$ref": "#/definitions/Configuration",
+            "description": "The log4js configuration.\nFor more information see https://log4js-node.github.io/log4js-node/api.html."
+        },
+        "projectConfig": {
+            "$ref": "#/definitions/ProjectConfig",
+            "description": "The configuration of the node project."
+        }
+    },
+    "type": "object"
+}
+

@@ -15,7 +15,8 @@ For all operations, you are guided through the standardized menu navigation of v
 
 ## Configuration
 
-_Configuration of gitex-vscode will follow soon_
+To configure gitex flow, the standard gitex configuration file can be used.
+To do this, simply create a corresponding `.gitex[.json]` file in the root directory of your project and specify the desired [settings](https://github.com/gitex-flow/gitex-flow-node#configuation) there.
 
 ## Acknowledgements
 
