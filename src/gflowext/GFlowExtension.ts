@@ -86,6 +86,7 @@ export class GFlowExtension extends GFlow {
     }
     try {
       await super.init(config);
+      vscode.window.showInformationMessage(`Successfully initialized.`);
     } catch (error) {
       vscode.window.showErrorMessage(`Failed initialize git flow: ${error}`);
       let force = await vscode.window.showQuickPick(['yes', 'no'], {
@@ -93,6 +94,7 @@ export class GFlowExtension extends GFlow {
       });
       if (force === 'yes') {
         await super.init(config, true);
+        vscode.window.showInformationMessage(`Successfully initialized.`);
       }
     }
   }
