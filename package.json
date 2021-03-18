@@ -2,7 +2,7 @@
   "name": "gitex-flow-vscode",
   "displayName": "gitex-flow",
   "description": "The official gitex-flow extension for vscode.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./out/extension.js",
   "publisher": "gitex-flow",
   "author": {
