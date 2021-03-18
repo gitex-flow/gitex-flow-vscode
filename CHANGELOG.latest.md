@@ -1,10 +1,10 @@
-## 1.0.3 (2020-12-21)
+## 1.0.4 (2021-03-18)
 
 
 ### Bug Fixes
 
-* **config:** Fixed loading configuration from gitex config file ([31836f9](https://github.com/gitex-flow/gitex-flow-vscode/commits/31836f9055ea46fd8c6e148da5e4720988998801)), closes [#3](https://github.com/gitex-flow/gitex-flow-vscode/issues/3)
-* **vscode-ex:** Added missing notification on gitex-flow init ([02213d1](https://github.com/gitex-flow/gitex-flow-vscode/commits/02213d1cd456701f2a3e77a940e1a778634a2143))
+* **gitex-flow:** Updated gitex-flow to version 2.2.2 ([5b77df1](https://github.com/gitex-flow/gitex-flow-vscode/commits/5b77df1ebd44fa64333f3e53952ee06f98d1caa2))
+* **vscode-ex:** Extension is refreshed after changes to the configuration file ([d003168](https://github.com/gitex-flow/gitex-flow-vscode/commits/d003168e5f8b96a14d03d2e96454769ee4aa4d7c)), closes [#4](https://github.com/gitex-flow/gitex-flow-vscode/issues/4)
 
 
 

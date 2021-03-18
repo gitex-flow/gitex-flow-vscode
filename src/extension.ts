@@ -11,48 +11,55 @@ import { GFlowExtension } from './gflowext/GFlowExtension';
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   vscode.window.registerTreeDataProvider('gitexFlowActionsTreeView', new GitexFlowTreeProvider());
 
-  const extension = await GFlowExtension.create();
+  const workspaceFolder = await getWorkspaceFolder();
+  let extension = await GFlowExtension.create(workspaceFolder.uri.fsPath);
+  const configWatcher = vscode.workspace.createFileSystemWatcher('**/*.{gitex,gitex.json,gitex-flow,gitex-flow.json}');
+  configWatcher.onDidChange(async function () {
+    extension = await GFlowExtension.create(workspaceFolder.uri.fsPath);
+    vscode.window.showInformationMessage(`The configuration of gitex-flow was refreshed.`);
+  });
 
-  const initDisposable = vscode.commands.registerCommand('gitex-flow.init', async () => {
+  const initDisposable = vscode.commands.registerCommand('gitex-flow.init', async function () {
     await extension.init();
   });
 
-  const featureStartDisposable = vscode.commands.registerCommand('gitex-flow.feature.start', async () => {
+  const featureStartDisposable = vscode.commands.registerCommand('gitex-flow.feature.start', async function () {
     await extension.feature.start('#<issue>');
   });
-  const featureFinishDisposable = vscode.commands.registerCommand('gitex-flow.feature.finish', async () => {
+  const featureFinishDisposable = vscode.commands.registerCommand('gitex-flow.feature.finish', async function () {
     await extension.feature.finish();
   });
 
-  const bugfixStartDisposable = vscode.commands.registerCommand('gitex-flow.bugfix.start', async () => {
+  const bugfixStartDisposable = vscode.commands.registerCommand('gitex-flow.bugfix.start', async function () {
     await extension.bugfix.start('#<issue>');
   });
-  const bugfixFinishDisposable = vscode.commands.registerCommand('gitex-flow.bugfix.finish', async () => {
+  const bugfixFinishDisposable = vscode.commands.registerCommand('gitex-flow.bugfix.finish', async function () {
     await extension.bugfix.finish();
   });
 
-  const releaseStartDisposable = vscode.commands.registerCommand('gitex-flow.release.start', async () => {
+  const releaseStartDisposable = vscode.commands.registerCommand('gitex-flow.release.start', async function () {
     await extension.release.start();
   });
-  const releaseFinishDisposable = vscode.commands.registerCommand('gitex-flow.release.finish', async () => {
+  const releaseFinishDisposable = vscode.commands.registerCommand('gitex-flow.release.finish', async function () {
     await extension.release.finish();
   });
 
-  const hotfixStartDisposable = vscode.commands.registerCommand('gitex-flow.hotfix.start', async () => {
+  const hotfixStartDisposable = vscode.commands.registerCommand('gitex-flow.hotfix.start', async function () {
     await extension.hotfix.start();
   });
-  const hotfixFinishDisposable = vscode.commands.registerCommand('gitex-flow.hotfix.finish', async () => {
+  const hotfixFinishDisposable = vscode.commands.registerCommand('gitex-flow.hotfix.finish', async function () {
     await extension.hotfix.finish();
   });
 
-  const supportStartDisposable = vscode.commands.registerCommand('gitex-flow.support.start', async () => {
+  const supportStartDisposable = vscode.commands.registerCommand('gitex-flow.support.start', async function () {
     await extension.support.start('2.0.0-lts');
   });
-  const supportStopDisposable = vscode.commands.registerCommand('gitex-flow.support.finish', async () => {
+  const supportStopDisposable = vscode.commands.registerCommand('gitex-flow.support.finish', async function () {
     await extension.support.finish();
   });
 
   context.subscriptions.push(
+    configWatcher,
     initDisposable,
     featureStartDisposable,
     featureFinishDisposable,
@@ -73,3 +80,19 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
  * This method is called when your extension is deactivated.
  */
 export async function deactivate(): Promise<void> {}
+
+/**
+ * Gets the workspace path.
+ */
+async function getWorkspaceFolder(): Promise<vscode.WorkspaceFolder> {
+  let workspaceFolder: vscode.WorkspaceFolder | undefined;
+  if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length === 1) {
+    workspaceFolder = vscode.workspace.workspaceFolders[0];
+  } else {
+    workspaceFolder = await vscode.window.showWorkspaceFolderPick();
+  }
+  if (!workspaceFolder) {
+    throw new Error('No workspace folder was set.');
+  }
+  return workspaceFolder;
+}
