@@ -8,19 +8,10 @@ import { GFlowExtBranch } from './branches/GFlowExtBranch';
 export class GFlowExtension extends GFlow {
   /**
    * Creates a new instance of the GFlowExtension.
+   *
+   * @param projectPath - Path to the vscode project.
    */
-  public static async create(): Promise<GFlow> {
-    let workspaceFolder: vscode.WorkspaceFolder | undefined;
-    if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length === 1) {
-      workspaceFolder = vscode.workspace.workspaceFolders[0];
-    } else {
-      workspaceFolder = await vscode.window.showWorkspaceFolderPick();
-    }
-
-    if (!workspaceFolder) {
-      throw new Error('No workspace folder was set.');
-    }
-    const projectPath = workspaceFolder.uri.fsPath;
+  public static async create(projectPath: string): Promise<GFlow> {
     const gitFlow = new AvhGitFlow(projectPath);
     const gFlowConfig = GFlowExtension.loadConfig(projectPath);
     const gFlow = new GFlowExtension(gitFlow, gFlowConfig);

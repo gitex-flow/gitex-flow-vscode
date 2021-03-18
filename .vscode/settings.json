@@ -11,6 +11,7 @@
     "conventionalCommits.scopes": [
         "project",
         "vscode-ex",
-        "config"
+        "config",
+        "gitex-flow"
     ]
 }
