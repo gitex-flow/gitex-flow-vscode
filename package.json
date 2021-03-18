@@ -75,7 +75,7 @@
     "vscode-test": "^1.4.1"
   },
   "dependencies": {
-    "gitex-flow": "^2.2.1"
+    "gitex-flow": "^2.2.2"
   },
   "activationEvents": [
     "*"
