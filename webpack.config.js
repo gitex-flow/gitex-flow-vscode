@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 /**@type {import('webpack').Configuration}*/
 const config = {
@@ -17,10 +18,23 @@ const config = {
   devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode',
+    'conventional-changelog-preset-loader': 'commonjs conventional-changelog-preset-loader',
+    handlebars: 'commonjs handlebars',
+    log4js: 'commonjs log4js',
   },
   resolve: {
     extensions: ['.ts', '.js'],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, 'node_modules', 'conventional-changelog-angular', 'templates'),
+          to: 'templates',
+        },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
