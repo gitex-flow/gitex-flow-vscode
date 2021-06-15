@@ -547,6 +547,200 @@
             },
             "type": "object"
         },
+        "Options": {
+            "properties": {
+                "commentChar": {
+                    "default": null,
+                    "description": "What commentChar to use. By default it is `null`, so no comments are stripped.\nSet to `#` if you pass the contents of `.git/COMMIT_EDITMSG` directly.\n\nIf you have configured the git commentchar via git config `core.commentchar`\nyou'll want to pass what you have set there.",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "fieldPattern": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/RegExp"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "/^-(.*?)-$/",
+                    "description": "Pattern to match other fields."
+                },
+                "headerCorrespondence": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "['type', 'scope', 'subject']",
+                    "description": "Used to define what capturing group of `headerPattern` captures what header\npart. The order of the array should correspond to the order of\n`headerPattern`'s capturing group. If the part is not captured it is `null`.\nIf it's a `string` it will be converted to an `array` separated by a comma."
+                },
+                "headerPattern": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/RegExp"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "/^(\\w*)(?:\\(([\\w\\$\\.\\-\\* ]*)\\))?\\: (.*)$/",
+                    "description": "Used to match header pattern."
+                },
+                "issuePrefixes": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "['#']",
+                    "description": "The prefixes of an issue. EG: In `gh-123` `gh-` is the prefix."
+                },
+                "issuePrefixesCaseSensitive": {
+                    "default": false,
+                    "description": "Used to define if `issuePrefixes` should be considered case sensitive.",
+                    "type": "boolean"
+                },
+                "mergeCorrespondence": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": null,
+                    "description": "Used to define what capturing group of `mergePattern`.\n\nIf it's a `string` it will be converted to an `array` separated by a comma."
+                },
+                "mergePattern": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/RegExp"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": null,
+                    "description": "Pattern to match merge headers. EG: branch merge, GitHub or GitLab like pull\nrequests headers. When a merge header is parsed, the next line is used for\nconventional header parsing.\n\nFor example, if we have a commit\n\n```text\nMerge pull request #1 from user/feature/feature-name\n\nfeat(scope): broadcast $destroy event on scope destruction\n```\n\nWe can parse it with these options and the default headerPattern:\n\n```javascript\n{\n mergePattern: /^Merge pull request #(\\d+) from (.*)$/,\n mergeCorrespondence: ['id', 'source']\n}\n```"
+                },
+                "noteKeywords": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "['BREAKING CHANGE']",
+                    "description": "Keywords for important notes. This value is case __insensitive__. If it's a\n`string` it will be converted to an `array` separated by a comma."
+                },
+                "referenceActions": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "['close', 'closes', 'closed', 'fix', 'fixes', 'fixed', 'resolve', 'resolves', 'resolved']",
+                    "description": "Keywords to reference an issue. This value is case __insensitive__. If it's a\n`string` it will be converted to an `array` separated by a comma.\n\nSet it to `null` to reference an issue without any action."
+                },
+                "revertCorrespondence": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "['header', 'hash']",
+                    "description": "Used to define what capturing group of `revertPattern` captures what reverted\ncommit fields. The order of the array should correspond to the order of\n`revertPattern`'s capturing group.\n\nFor example, if we had commit\n\n```\nRevert \"throw an error if a callback is passed\"\n\nThis reverts commit 9bb4d6c.\n```\n\nIf configured correctly, the parsed result would be\n\n```\n{\n revert: {\n   header: 'throw an error if a callback is passed',\n   hash: '9bb4d6c'\n }\n}\n```\n\nIt implies that this commit reverts a commit with header `'throw an error if\na callback is passed'` and hash `'9bb4d6c'`.\n\nIf it's a `string` it will be converted to an `array` separated by a comma."
+                },
+                "revertPattern": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/RegExp"
+                        },
+                        {
+                            "type": [
+                                "null",
+                                "string"
+                            ]
+                        }
+                    ],
+                    "default": "/^Revert\\s\"([\\s\\S]*)\"\\s*This reverts commit (\\w*)\\./",
+                    "description": "Pattern to match what this commit reverts."
+                },
+                "warn": {
+                    "default": "function () {}",
+                    "description": "What warn function to use. For example, `console.warn.bind(console)` or\n`grunt.log.writeln`. By default, it's a noop. If it is `true`, it will error\nif commit cannot be parsed (strict).",
+                    "type": [
+                        "object",
+                        "boolean"
+                    ]
+                }
+            },
+            "type": "object"
+        },
         "PatternLayout": {
             "properties": {
                 "pattern": {
@@ -573,12 +767,33 @@
         "ProjectConfig": {
             "description": "Options of the git flow node project.",
             "properties": {
+                "autoStash": {
+                    "description": "Auto stashes the uncommited changes on starting a git flow branch.\nAfter the git flow branch was created, the latest stash is popped.\n*DEFAULTS*: true",
+                    "type": "boolean"
+                },
                 "bumpVersionFiles": {
                     "description": "Specifies the JSON files containing a version attribute to be overwritten if the version changes.\n*DEFAULTS*: 'package.json' and 'package-lock.json'",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
+                },
+                "changelog": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Record<string,unknown>"
+                        },
+                        {
+                            "properties": {
+                                "type": {
+                                    "description": "The type of the changelog.\nThis option indicates which type of changelog should be parsed and generated.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    ],
+                    "description": "Sets the configuration of the changelog.\n\n*DEFAULTS*:\n```JSON\n{\n   \"type\": \"ConventionalChangelog\",\n   \"changelogFileName\": \"CHANGELOG.md\",\n   \"storeLatestChangelog\": false,\n   \"conventionalChangelogPresent\": \"angular\"\n}\n```"
                 },
                 "changelogFileName": {
                     "description": "Specifies the name of the changelog.\n*DEFAULTS*: CHANGELOG.md",
@@ -587,6 +802,10 @@
                 "conventionalChangelogPresent": {
                     "description": "Specifies the conventional commit format.\nThe selectable options are:\n- angular (default)\n- atom\n- ember\n- eslint\n- jquery\n- jshint\n\nFor more infomation check out the documentation of the\n[conventional-changelog-preset-loader](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-preset-loader).\nThis loader is used to load the corresponding present.",
                     "type": "string"
+                },
+                "conventionalCommit": {
+                    "$ref": "#/definitions/Options",
+                    "description": "Sets the conventional commit [options of conventional-commits-parser](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#options)\n\nAdditional *DEFAULTS*:\n```JSON\n {\n   \"referenceActions\": [\n     \"close\",\n     \"closes\",\n     \"closed\",\n     \"fix\",\n     \"fixes\",\n     \"fixed\",\n     \"resolve\",\n     \"resolves\",\n     \"resolved\",\n     \"refs\",\n     \"references\"\n   ],\n   \"noteKeywords\": [\"BREAKING CHANGE\", \"SECURITY\", \"REMOVED\"]\n }\n```"
                 },
                 "projectPath": {
                     "description": "Path to the node project folder / git repository.",
@@ -603,6 +822,9 @@
             },
             "type": "object"
         },
+        "Record<string,unknown>": {
+            "type": "object"
+        },
         "RecordingAppender": {
             "properties": {
                 "type": {
@@ -610,6 +832,46 @@
                         "recording"
                     ],
                     "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RegExp": {
+            "properties": {
+                "dotAll": {
+                    "description": "Returns a Boolean value indicating the state of the dotAll flag (s) used with a regular expression.\nDefault is false. Read-only.",
+                    "type": "boolean"
+                },
+                "flags": {
+                    "description": "Returns a string indicating the flags of the regular expression in question. This field is read-only.\nThe characters in this string are sequenced and concatenated in the following order:\n\n   - \"g\" for global\n   - \"i\" for ignoreCase\n   - \"m\" for multiline\n   - \"u\" for unicode\n   - \"y\" for sticky\n\nIf no flags are set, the value is the empty string.",
+                    "type": "string"
+                },
+                "global": {
+                    "description": "Returns a Boolean value indicating the state of the global flag (g) used with a regular expression. Default is false. Read-only.",
+                    "type": "boolean"
+                },
+                "ignoreCase": {
+                    "description": "Returns a Boolean value indicating the state of the ignoreCase flag (i) used with a regular expression. Default is false. Read-only.",
+                    "type": "boolean"
+                },
+                "lastIndex": {
+                    "type": "number"
+                },
+                "multiline": {
+                    "description": "Returns a Boolean value indicating the state of the multiline flag (m) used with a regular expression. Default is false. Read-only.",
+                    "type": "boolean"
+                },
+                "source": {
+                    "description": "Returns a copy of the text of the regular expression pattern. Read-only. The regExp argument is a Regular expression object. It can be a variable name or a literal.",
+                    "type": "string"
+                },
+                "sticky": {
+                    "description": "Returns a Boolean value indicating the state of the sticky flag (y) used with a regular\nexpression. Default is false. Read-only.",
+                    "type": "boolean"
+                },
+                "unicode": {
+                    "description": "Returns a Boolean value indicating the state of the Unicode flag (u) used with a regular\nexpression. Default is false. Read-only.",
+                    "type": "boolean"
                 }
             },
             "type": "object"

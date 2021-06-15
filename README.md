@@ -18,6 +18,19 @@ For all operations, you are guided through the standardized menu navigation of v
 To configure gitex flow, the standard gitex configuration file can be used.
 To do this, simply create a corresponding `.gitex[.json]` file in the root directory of your project and specify the desired [settings](https://github.com/gitex-flow/gitex-flow-node#configuation) there.
 
+## Usage tips
+
+The gitex-flow extension harmonizes perfectly with the following other extensions:
+
+1. [Conventional Commits](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits)
+2. [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph)
+
+For example, my visual studio code looks like this:
+
+<p align="center">
+  <img src="./assets/screenshot_other_extensions.png">
+</p>
+
 ## Acknowledgements
 
 A special thanks to the developer of the visual studio extension [Gitflow Actions Sidebar](https://github.com/ardisaurus/vscode-gitflow) named [ardisaurus](https://github.com/ardisaurus). His project has provided the template of gitex-vscode in many points. But a fork of the project was not reasonable because of the big adaptations.
