@@ -2,7 +2,7 @@
   "name": "gitex-flow-vscode",
   "displayName": "gitex-flow",
   "description": "The official gitex-flow extension for vscode.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "main": "./dist/extension",
   "publisher": "gitex-flow",
   "author": {
@@ -14,7 +14,8 @@
     "vscode:prepublish": "webpack --mode production",
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
-    "compile-test": "tsc -p ./",
+    "test-compile": "npm run compile",
+    "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
@@ -82,7 +83,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "gitex-flow": "^2.3.3"
+    "gitex-flow": "^2.3.4"
   },
   "activationEvents": [
     "*"
