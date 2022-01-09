@@ -2,7 +2,7 @@
   "name": "gitex-flow-vscode",
   "displayName": "gitex-flow",
   "description": "The official gitex-flow extension for vscode.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "./dist/extension",
   "publisher": "gitex-flow",
   "author": {
@@ -83,7 +83,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "gitex-flow": "^2.3.4"
+    "gitex-flow": "^2.3.5"
   },
   "activationEvents": [
     "*"

@@ -1,14 +1,9 @@
-# 1.2.0 (2021-10-24)
+## 1.2.1 (2022-01-09)
 
 
 ### Bug Fixes
 
-* **gitex-flow:** Updated gitex-flow to version 2.3.4 ([461c425](https://github.com/gitex-flow/gitex-flow-vscode/commits/461c425271d3166203fca85697f6583b78a67742))
-
-
-### Features
-
-* **vscode-ex:** Added multi-root workspace support ([bf74855](https://github.com/gitex-flow/gitex-flow-vscode/commits/bf74855eee7aee5607ddd66ad50cf233b213cc7b)), closes [#9](https://github.com/gitex-flow/gitex-flow-vscode/issues/9)
+* **gitex-flow:** Updated gitex-flow to version 2.3.5 (added compatibility with non-node projects) ([bcf8783](https://github.com/gitex-flow/gitex-flow-vscode/commits/bcf8783b57c45a27b762921e2ddaeb641163525f))
 
 
 
