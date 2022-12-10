@@ -86,7 +86,7 @@
     "gitex-flow": "^2.3.8"
   },
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "contributes": {
     "jsonValidation": [
