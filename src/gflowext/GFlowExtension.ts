@@ -77,6 +77,11 @@ export class GFlowExtension extends GFlow {
         prompt: 'Prefix of support branches',
         value: 'support',
       });
+      const versionPrefix = await vscode.window.showInputBox({
+        prompt: 'Prefix of (pre-)release versions',
+        placeHolder: 'ex. "v" for "v1.0.0',
+      });
+      config.versionTagPrefix = versionPrefix === '' ? undefined : versionPrefix;
     }
     try {
       await super.init(config);
