@@ -1,6 +1,7 @@
-import { AvhGitFlow, GFlow, GFlowConfig, GFlowConfigLoader, GitFlow, GitFlowBranch, GitFlowConfig } from 'gitex-flow';
+import { AvhGitFlow, GFlow, GFlowConfig, GFlowConfigLoader, GitFlow, GitFlowConfig } from 'gitex-flow';
 import * as vscode from 'vscode';
 import { GFlowExtBranch } from './branches/GFlowExtBranch';
+import { GFlowExtTag } from './tags/GFlowExtTag';
 
 /**
  * Main class of the gitex-flow extension for vscode.
@@ -31,6 +32,8 @@ export class GFlowExtension extends GFlow {
     this.release = new GFlowExtBranch(this.release, this.options.projectConfig);
     this.hotfix = new GFlowExtBranch(this.hotfix, this.options.projectConfig);
     this.support = new GFlowExtBranch(this.support, this.options.projectConfig);
+    this.alpha = new GFlowExtTag(this.alpha);
+    this.beta = new GFlowExtTag(this.beta);
   }
 
   /**
@@ -40,7 +43,7 @@ export class GFlowExtension extends GFlow {
    * @param force - Force reinitialisation if git flow already initialized.
    */
   public async init(): Promise<void> {
-    let useDefault = await vscode.window.showQuickPick(['yes', 'no'], {
+    const useDefault = await vscode.window.showQuickPick(['yes', 'no'], {
       placeHolder: `Use default git flow config`,
     });
     let config: GitFlowConfig | undefined = undefined;

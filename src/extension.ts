@@ -44,6 +44,45 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     await extension.release.finish();
   });
 
+  const prereleaseStartDisposable = vscode.commands.registerCommand('gitex-flow.prerelease.start', async function () {
+    const extension = await createGFlow();
+
+    const featureBranches = await extension.feature.list();
+    const bugfixBranches = await extension.bugfix.list();
+    const releaseBranches = await extension.release.list();
+    const hotfixBranches = await extension.hotfix.list();
+    const config = await extension.config.get();
+    const alphaBranches = [...featureBranches, ...bugfixBranches, config.developBranch ?? 'develop'];
+    const betaBranches = [...releaseBranches, ...hotfixBranches];
+
+    const availablePrereleases = ['alpha'];
+    if (betaBranches.length !== 0) {
+      availablePrereleases.push('beta');
+    }
+
+    let prereleaseType: string | undefined = availablePrereleases[0];
+    if (availablePrereleases.length > 1) {
+      prereleaseType = await vscode.window.showQuickPick(availablePrereleases, {
+        placeHolder: `Prerelease type`,
+      });
+    }
+
+    if (prereleaseType === 'alpha') {
+      const branchName = await vscode.window.showQuickPick(alphaBranches, {
+        placeHolder: `Base branch for alpha release`,
+      });
+      if (branchName) {
+        await extension.alpha.start(branchName);
+      }
+    } else if (prereleaseType === 'beta') {
+      const branchName = await vscode.window.showQuickPick(betaBranches, {
+        placeHolder: `Base branch for beta release`,
+      });
+      if (branchName) {
+        await extension.beta.start(branchName);
+      }
+    }
+  });
   const hotfixStartDisposable = vscode.commands.registerCommand('gitex-flow.hotfix.start', async function () {
     const extension = await createGFlow();
     await extension.hotfix.start();
@@ -70,6 +109,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     bugfixFinishDisposable,
     releaseStartDisposable,
     releaseFinishDisposable,
+    prereleaseStartDisposable,
     hotfixStartDisposable,
     hotfixFinishDisposable,
     supportStartDisposable,
@@ -86,10 +126,10 @@ export async function deactivate(): Promise<void> {}
 
 /**
  * Creates GFlow instance.
- * 
- * @returns A promise on the GFlow instance. 
+ *
+ * @returns A promise on the GFlow instance.
  */
- async function createGFlow(): Promise<GFlow> {
+async function createGFlow(): Promise<GFlow> {
   const workspaceFolder = await getWorkspaceFolder();
   return GFlowExtension.create(workspaceFolder.uri.fsPath);
 }

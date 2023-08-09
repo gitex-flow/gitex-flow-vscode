@@ -4,6 +4,7 @@ export class GitexFlowTreeProvider implements vscode.TreeDataProvider<vscode.Tre
   private data: TreeItem[] = [
     new TreeItem('Feature', 'gitex-feature', new vscode.ThemeIcon('rocket')),
     new TreeItem('Bugfix', 'gitex-bugfix', new vscode.ThemeIcon('bug')),
+    new TreeItem('Prerelease', 'gitex-prerelease', new vscode.ThemeIcon('megaphone')),
     new TreeItem('Release', 'gitex-release', new vscode.ThemeIcon('package')),
     new TreeItem('Hotfix', 'gitex-hotfix', new vscode.ThemeIcon('flame')),
     new TreeItem('Support', 'gitex-support', new vscode.ThemeIcon('star-empty')),

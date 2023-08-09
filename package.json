@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/gitex-flow/gitex-flow-vscode",
   "engines": {
-    "vscode": "^1.50.0"
+    "vscode": "^1.81.0"
   },
   "keywords": [
     "git",
@@ -162,6 +162,12 @@
         "icon": "$(primitive-square)"
       },
       {
+        "command": "gitex-flow.prerelease.start",
+        "title": "Start prerelease",
+        "category": "gitex-flow",
+        "icon": "$(play)"
+      },
+      {
         "command": "gitex-flow.hotfix.start",
         "title": "Start hotfix",
         "category": "gitex-flow",
@@ -232,6 +238,11 @@
           "command": "gitex-flow.release.finish",
           "when": "viewItem == gitex-release",
           "group": "inline@2"
+        },
+        {
+          "command": "gitex-flow.prerelease.start",
+          "when": "viewItem == gitex-prerelease",
+          "group": "inline@1"
         },
         {
           "command": "gitex-flow.hotfix.start",

@@ -2,7 +2,7 @@ import { GFlowBranch, GitFlowBranch, ProjectConfig } from 'gitex-flow';
 import * as vscode from 'vscode';
 
 /**
- * This class extending a hotfix branch with some helpful functionality.
+ * This class extending a gflow branch with some helpful functionality.
  */
 export class GFlowExtBranch extends GFlowBranch {
   /**
