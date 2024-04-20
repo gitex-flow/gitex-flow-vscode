@@ -83,7 +83,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "gitex-flow": "^2.4.0"
+    "gitex-flow": "^2.4.1"
   },
   "activationEvents": [
     "onStartupFinished"
